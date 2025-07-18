@@ -10,8 +10,17 @@ const data = [
   { id: 2, name: 'Item 2' },
 ];
 
+const interests=[
+  {id:1, name: 'Sports'},
+  {id:2, name: 'music'},
+];
+
 app.get('/api/items', (req, res) => {
   res.json(data);
+});
+
+app.get('/api/interests', (req, res) => {
+  res.json(interests);
 });
 
 app.listen(port, () => {

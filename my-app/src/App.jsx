@@ -3,13 +3,20 @@ import './App.css'
 
 function App() {
   const [items, setItems] = useState([]);
+  const [interests, setInterests] = useState([]);
 
   useEffect(() => {
     fetch("http://localhost:5050/api/items")
       .then((response) => response.json())
       .then((data) => setItems(data));
   }, []);
-""
+
+  useEffect(() => {
+    fetch("http://localhost:5050/api/interests")
+      .then((response) => response.json())
+      .then((data) => setInterests(data));
+  }, []);
+
   return (
     <div>
       <header>
@@ -20,6 +27,16 @@ function App() {
           ))}
         </ul>
       </header>
+
+      <header>
+        <h1>Interests</h1>
+        <ul>
+          {interests.map((interest) => (
+            <li key={interest.id}>{interest.name}</li>
+          ))}
+        </ul>
+      </header>
+      
     </div>
   );
 }
