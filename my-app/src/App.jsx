@@ -4,6 +4,7 @@ import './App.css'
 function App() {
   const [items, setItems] = useState([]);
   const [interests, setInterests] = useState([]);
+  const [pendingInterests, setPendingInterests] = useState([]);
 
   useEffect(() => {
     fetch("http://localhost:5050/api/items")
@@ -15,6 +16,12 @@ function App() {
     fetch("http://localhost:5050/api/interests")
       .then((response) => response.json())
       .then((data) => setInterests(data));
+  }, []);
+
+  useEffect(() => {
+    fetch("http://localhost:5050/api/pendinginterests")
+      .then((response) => response.json())
+      .then((data) => setPendingInterests(data));
   }, []);
 
   return (
@@ -32,6 +39,15 @@ function App() {
         <h1>Interests</h1>
         <ul>
           {interests.map((interest) => (
+            <li key={interest.id}>{interest.name}</li>
+          ))}
+        </ul>
+      </header>
+
+      <header>
+        <h1>Pending Interests- more than a Month</h1>
+        <ul>
+          {pendingInterests.map((interest) => (
             <li key={interest.id}>{interest.name}</li>
           ))}
         </ul>
