@@ -1,30 +1,17 @@
 import { useState} from 'react';
+import { createTask } from '../service/TasksService';
 
-function AddTask({ tasks, setTasks }){
+function AddTask({ tasks,statusOptions, setTasks }){
 
     const [name, setName] = useState('');
     const [status, setStatus] = useState('pending');
-    const statusOptions = [
-    'pending',
-    'in progress',
-    'completed',
-    'on hold',
-    'cancelled'
-  ];
-
-    const handleAddTask = async (e) => {
+    
+  const handleAddTask = async (e) => {
     e.preventDefault();
     if (!name) return alert('Task name is required');
-    const newTask = { name, status };
     try {
-      const res = await fetch('http://localhost:3030/api/tasks', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newTask),
-      });
-      if (!res.ok) throw new Error('Failed to add task');
-      const result = await res.json();
-      setTasks([...tasks, { ...newTask, _id: result.id }]);
+      const result = await createTask({ name, status });
+      setTasks([...tasks, { name, status, _id: result.id }]);
       setName('');
       setStatus('pending');
     } catch (err) {

@@ -1,20 +1,15 @@
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { deleteTask as deleteTaskAPI } from '../service/TasksService';
 
 function DeleteTask({ taskId, tasks, setTasks }) {
+
   const deleteTask = async (id) => {
     try {
-      const response = await fetch(`http://localhost:3030/api/tasks/${id}`, {
-        method: 'DELETE',
-      });
-      const data = await response.json();
-      if (response.ok) {
-        setTasks(tasks.filter(task => task._id !== id));
-      } else {
-        console.error('Delete failed:', data.error);
-      }
+      await deleteTaskAPI(id);
+      setTasks(tasks.filter((task) => task._id !== id));
     } catch (error) {
-      console.error('Network error:', error);
+      console.error('Delete failed:', error);
     }
   };
 
