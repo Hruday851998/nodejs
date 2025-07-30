@@ -5,7 +5,7 @@ import DeleteTask from './controller/DeleteTask';
 import { getTasks } from './service/TasksService';
 
 
-function App() {
+function Tasks() {
   
   const [tasks, setTasks] = useState([]);
   const statusOptions = [
@@ -57,4 +57,4 @@ function App() {
   );
 }
 
-export default App;
+export default Tasks;
