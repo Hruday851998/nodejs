@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import AddTask from './controller/AddTask';
-import UpdateTask from './controller/UpdateTask';
-import DeleteTask from './controller/DeleteTask';
-import { getTasks } from './service/TasksService';
+import AddTask from '../controller/AddTask';
+import UpdateTask from '../controller/UpdateTask';
+import DeleteTask from '../controller/DeleteTask';
+import { getTasks } from '../service/TasksService';
 
 
 function Tasks() {
